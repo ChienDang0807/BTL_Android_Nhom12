@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_2"
+    android:fitsSystemWindows="true">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#90000000"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingTop="10dp"
+        android:layout_marginTop="70dp"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:layout_marginStart="10dp"
+                android:text="Họ và tên" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:backgroundTint="@color/white"
+                android:inputType="text"
+                android:layout_marginStart="30dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:layout_marginStart="10dp"
+                android:text="Ngày sinh" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <EditText
+                android:id="@+id/dob"
+                android:layout_width="320dp"
+                android:layout_marginEnd="3dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/white"
+                android:inputType="text"
+                android:layout_marginStart="30dp" />
+            <ImageView
+                android:layout_width="30dp"
+                android:id="@+id/calngaysinh"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_calendar_month_24"
+                >
+            </ImageView>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:layout_marginStart="10dp"
+                android:text="Email" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:backgroundTint="@color/white"
+                android:inputType="text"
+                android:layout_marginStart="30dp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:layout_marginStart="10dp"
+                android:text="Điện thoại" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <EditText
+                android:id="@+id/et_phone"
+                android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:backgroundTint="@color/white"
+                android:inputType="number"
+                android:layout_marginStart="30dp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:layout_marginStart="10dp"
+                android:text="Mật khẩu" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <EditText
+                android:id="@+id/et_password"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/white"
+                android:layout_marginStart="30dp"
+                android:text=""
+                android:inputType="textPassword" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đăng ký"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+            <Button
+                android:id="@+id/btnlogin"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đăng nhập"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+        </TableRow>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
