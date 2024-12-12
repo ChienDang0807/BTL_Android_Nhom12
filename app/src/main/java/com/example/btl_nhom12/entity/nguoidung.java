@@ -1,4 +1,4 @@
-package com.example.btl_nhom12.doituong;
+package com.example.btl_nhom12.entity;
 
 public class nguoidung {
     private String ten;

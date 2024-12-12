@@ -1,4 +1,4 @@
-package com.example.btl_nhom12;
+package com.example.btl_nhom12.service;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,20 +10,24 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.btl_nhom12.R;
+import com.example.btl_nhom12.config.SQLite;
+import com.example.btl_nhom12.repository.UserRepository;
 
 public class dangky extends AppCompatActivity implements View.OnClickListener{
     EditText etName, etEmail, etDOB, etPhone, etPassword;
     private Button btnRegister, btnlogin;
     private SQLite databaseHelper;
+    private UserRepository userRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_dangky);
+
         databaseHelper = new SQLite(this);
+        userRepository = new UserRepository(databaseHelper);
 
         etName = findViewById(R.id.et_name);
         etEmail = findViewById(R.id.et_email);
@@ -46,7 +50,7 @@ public class dangky extends AppCompatActivity implements View.OnClickListener{
                     || TextUtils.isEmpty(phone) || TextUtils.isEmpty(password)) {
                 Toast.makeText(dangky.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
             } else {
-                databaseHelper.addUser(name, email, dob, phone, password);
+                userRepository.addUser(name, email, dob, phone, password);
                 Toast.makeText(dangky.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, dangnhap.class);
                 startActivity(intent);

@@ -1,4 +1,4 @@
-package com.example.btl_nhom12;
+package com.example.btl_nhom12.service;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,22 +9,25 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.content.SharedPreferences;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.btl_nhom12.MainActivity;
+import com.example.btl_nhom12.R;
+import com.example.btl_nhom12.config.SQLite;
+import com.example.btl_nhom12.repository.UserRepository;
 
 public class dangnhap extends AppCompatActivity implements View.OnClickListener{
      EditText etdt, etPassword;
      Button btnLogin, btnRegister;
     private SQLite databaseHelper;
+    private UserRepository userRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dangnhap);
 
         databaseHelper = new SQLite(this);
+        userRepository = new UserRepository(databaseHelper);
 
         etdt = findViewById(R.id.phone);
         etPassword = findViewById(R.id.pass);
@@ -38,7 +41,7 @@ public class dangnhap extends AppCompatActivity implements View.OnClickListener{
 
             if (TextUtils.isEmpty(sdt) || TextUtils.isEmpty(password)) {
                 Toast.makeText(dangnhap.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
-            } else if (databaseHelper.checkUser(sdt, password)) {
+            } else if (userRepository.checkUser(sdt, password)) {
                 saveLoginState(sdt);
                 Toast.makeText(dangnhap.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 

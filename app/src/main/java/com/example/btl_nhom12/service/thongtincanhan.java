@@ -1,15 +1,13 @@
-package com.example.btl_nhom12;
+package com.example.btl_nhom12.service;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +18,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.btl_nhom12.doituong.nguoidung;
+import com.example.btl_nhom12.MainActivity;
+import com.example.btl_nhom12.R;
+import com.example.btl_nhom12.config.SQLite;
+import com.example.btl_nhom12.entity.nguoidung;
+import com.example.btl_nhom12.repository.UserRepository;
 
 import java.util.Calendar;
 
@@ -28,6 +30,7 @@ public class thongtincanhan extends AppCompatActivity implements View.OnClickLis
     ImageView btnngaysinh, btnhome;
     private int style = AlertDialog.THEME_HOLO_DARK;
     private SQLite databaseHelper;
+    private UserRepository userRepository;
     private nguoidung currentUser;
     Button btncapnhat;
     TextView txthoten, txtngaysinh, txtmail, txtsdt, txtmatkhau, txtuser;
@@ -45,11 +48,13 @@ public class thongtincanhan extends AppCompatActivity implements View.OnClickLis
         });
         getWidget();
         getDateNow();
+
         databaseHelper = new SQLite(this);
+        userRepository = new UserRepository(databaseHelper);
 
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
         String phoneNumber = sharedPreferences.getString("user_sdt", null);
-        currentUser = databaseHelper.getUserBysdt(phoneNumber);
+        currentUser = userRepository.getUserBysdt(phoneNumber);
         if(currentUser != null)
         {
             txthoten.setText(currentUser.getTen());
@@ -77,7 +82,7 @@ public class thongtincanhan extends AppCompatActivity implements View.OnClickLis
         super.onResume();
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
         String userPhone = sharedPreferences.getString("user_sdt", null);
-        nguoidung updatedUser = databaseHelper.getUserBysdt(userPhone);
+        nguoidung updatedUser = userRepository.getUserBysdt(userPhone);
         if (updatedUser != null) {
             txtuser.setText(updatedUser.getTen());
         }
@@ -156,11 +161,11 @@ public class thongtincanhan extends AppCompatActivity implements View.OnClickLis
 
                 try {
                     // Gọi hàm updateUser
-                    databaseHelper.updateUser(currentUser);
+                    userRepository.updateUser(currentUser);
                     Toast.makeText(thongtincanhan.this, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
 
                     // Làm tươi dữ liệu
-                    currentUser = databaseHelper.getUserBysdt(sdt);  // Lấy lại thông tin người dùng sau khi cập nhật
+                    currentUser = userRepository.getUserBysdt(sdt);  // Lấy lại thông tin người dùng sau khi cập nhật
                     if (currentUser != null) {
                         // Cập nhật giao diện người dùng với thông tin mới
                         txthoten.setText(currentUser.getTen());

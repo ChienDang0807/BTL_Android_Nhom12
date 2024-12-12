@@ -1,17 +1,17 @@
-package com.example.btl_nhom12;
+package com.example.btl_nhom12.repository;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.btl_nhom12.doituong.nguoidung;
+import com.example.btl_nhom12.config.SQLite;
+import com.example.btl_nhom12.entity.nguoidung;
 
-public class SQLite extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "TTCN.db";
-    private static final int DATABASE_VERSION = 1;
+public class UserRepository {
+    private SQLiteDatabase db;
+    private final SQLite dbHelper;
 
     private static final String TABLE_NAME = "tblnd";
     private static final String KEY_MA_USER = "mangdung";
@@ -21,28 +21,13 @@ public class SQLite extends SQLiteOpenHelper {
     private static final String KEY_SDT = "dienthoai";
     private static final String KEY_MK = "matkhau";
 
-    public SQLite(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
 
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String create_table = String.format(
-                "CREATE TABLE IF NOT EXISTS %s (" +
-                        "%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT)",
-                TABLE_NAME, KEY_MA_USER, KEY_NAME, KEY_EMAIL, KEY_DOB, KEY_SDT, KEY_MK);
-        sqLiteDatabase.execSQL(create_table);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL(String.format("DROP TABLE IF EXISTS %s", TABLE_NAME));
-        onCreate(sqLiteDatabase);
+    public UserRepository(SQLite dbHelper) {
+        this.dbHelper = dbHelper;
     }
 
     public void addUser(String name, String email, String dob, String phone, String password) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, name);
         values.put(KEY_EMAIL, email);
@@ -59,7 +44,7 @@ public class SQLite extends SQLiteOpenHelper {
         db.close();
     }
     public boolean checkUser(String dienthoai, String password) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
         String query = "SELECT * FROM tblnd WHERE dienthoai = ? AND matkhau = ?";
         Cursor cursor = db.rawQuery(query, new String[]{dienthoai, password});
         boolean exists = cursor.moveToFirst();
@@ -68,7 +53,7 @@ public class SQLite extends SQLiteOpenHelper {
         return exists;
     }
     public nguoidung getUserBysdt(String sdt) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
         nguoidung user = null;
 
         Cursor cursor = db.query(
@@ -97,7 +82,7 @@ public class SQLite extends SQLiteOpenHelper {
     }
 
     public void updateUser(nguoidung user) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, user.getTen());  // Cập nhật tên
         values.put(KEY_DOB, user.getNgaysinh());  // Cập nhật ngày sinh

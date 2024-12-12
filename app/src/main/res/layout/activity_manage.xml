@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/img_2"
-    android:fitsSystemWindows="true"
-    tools:context=".service.thongtincanhan">
+    android:fitsSystemWindows="true">
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,11 +33,22 @@
             android:layout_height="35dp"
             android:src="@drawable/baseline_home_24"
             android:layout_marginEnd="20dp"
-            android:layout_marginStart="350dp"
+            android:layout_marginStart="325dp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="8dp"
             android:id="@+id/home"
             >
+
+        </ImageView>
+        <ImageView
+            android:src="@drawable/baseline_logout_24"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="365dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/logout">
 
         </ImageView>
     </androidx.cardview.widget.CardView>
@@ -53,47 +63,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:layout_marginStart="10dp"
-                android:text="Họ và tên" />
+                android:text="Ngày cập nhât" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
             <EditText
-                android:id="@+id/txthoten"
-                android:layout_width="match_parent"
-                android:textColor="@color/white"
-                android:layout_marginEnd="10dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:backgroundTint="@color/white"
-                android:inputType="text"
-                android:layout_marginStart="30dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:layout_marginStart="10dp"
-                android:text="Ngày sinh" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-            <EditText
-                android:id="@+id/txtngaysinh"
+                android:id="@+id/txtngaydo"
                 android:layout_width="320dp"
                 android:layout_marginEnd="3dp"
                 android:layout_height="wrap_content"
@@ -104,7 +86,7 @@
                 android:layout_marginStart="30dp" />
             <ImageView
                 android:layout_width="30dp"
-                android:id="@+id/calngaysinh"
+                android:id="@+id/calngaydo"
                 android:layout_height="30dp"
                 android:src="@drawable/baseline_calendar_month_24"
                 >
@@ -119,14 +101,14 @@
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:layout_marginStart="10dp"
-                android:text="Email" />
+                android:text="Cân nặng" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
             <EditText
-                android:id="@+id/txtemail"
+                android:id="@+id/txtcannang"
                 android:layout_width="match_parent"
                 android:textColor="@color/white"
                 android:layout_marginEnd="10dp"
@@ -145,14 +127,14 @@
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:layout_marginStart="10dp"
-                android:text="Điện thoại" />
+                android:text="Chiều cao" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
             <EditText
-                android:id="@+id/txtdienthoai"
+                android:id="@+id/txtchieucao"
                 android:layout_width="match_parent"
                 android:textColor="@color/white"
                 android:layout_marginEnd="10dp"
@@ -165,40 +147,24 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:layout_marginStart="10dp"
-                android:text="Mật khẩu" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <EditText
-                android:id="@+id/txtmatkhau"
-                android:textColor="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_marginEnd="10dp"
-                android:backgroundTint="@color/white"
-                android:layout_marginStart="30dp"
-                android:text=""
-                android:inputType="textPassword" />
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
             <Button
                 android:id="@+id/btncapnhat"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="Cập nhật"
+                android:backgroundTint="#43A047"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+            <Button
+                android:id="@+id/btnxoa"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Xóa"
+                android:backgroundTint="#43A047"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
         </TableRow>

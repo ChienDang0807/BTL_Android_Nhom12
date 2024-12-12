@@ -1,10 +1,9 @@
-package com.example.btl_nhom12;
+package com.example.btl_nhom12.service;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,12 +14,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.btl_nhom12.doituong.nguoidung;
+import com.example.btl_nhom12.MainActivity;
+import com.example.btl_nhom12.R;
+import com.example.btl_nhom12.config.SQLite;
+import com.example.btl_nhom12.entity.nguoidung;
+import com.example.btl_nhom12.repository.UserRepository;
 
 public class thongtincanhanhome extends AppCompatActivity implements  View.OnClickListener {
     CardView btncapnhat, btnkiemtra;
     ImageView btnhome;
     private SQLite databaseHelper;
+    private UserRepository userRepository;
     TextView txtuser;
 
     @Override
@@ -34,10 +38,12 @@ public class thongtincanhanhome extends AppCompatActivity implements  View.OnCli
             return insets;
         });
         getWidget();
+
         databaseHelper = new SQLite(this);
+        userRepository = new UserRepository(databaseHelper);
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
         String phoneNumber = sharedPreferences.getString("user_sdt", null);
-        nguoidung updatedUser = databaseHelper.getUserBysdt(phoneNumber);
+        nguoidung updatedUser = userRepository.getUserBysdt(phoneNumber);
         if (updatedUser != null) {
             txtuser.setText(updatedUser.getTen());
         }
@@ -57,7 +63,7 @@ public class thongtincanhanhome extends AppCompatActivity implements  View.OnCli
         super.onResume();
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
         String userPhone = sharedPreferences.getString("user_sdt", null);
-        nguoidung updatedUser = databaseHelper.getUserBysdt(userPhone);
+        nguoidung updatedUser = userRepository.getUserBysdt(userPhone);
         if (updatedUser != null) {
             txtuser.setText(updatedUser.getTen());
         }
